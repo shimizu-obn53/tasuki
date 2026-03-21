@@ -7,8 +7,6 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 )
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 export async function POST(req: NextRequest) {
   const body = await req.json()
   const { listing_id, listing_title, buyer_name, buyer_email, buyer_phone, message } = body
@@ -35,6 +33,7 @@ export async function POST(req: NextRequest) {
 
   // メール通知送信（Resend）
   if (listing?.email && process.env.RESEND_API_KEY) {
+    const resend = new Resend(process.env.RESEND_API_KEY)
     // 管理者への通知
     await resend.emails.send({
       from: 'TASUKI <noreply@tasuki-match.jp>',
