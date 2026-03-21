@@ -76,19 +76,16 @@ export default function TermsPage() {
               <tbody>
                 <tr className="bg-green-50">
                   <td className="border border-green-200 px-4 py-3">譲渡者（売り手）</td>
-                  <td className="border border-green-200 px-4 py-3 text-center">成約金額の3%</td>
-                  <td className="border border-green-200 px-4 py-3 text-center text-gray-400">設定なし</td>
+                  <td className="border border-green-200 px-4 py-3 text-center text-gray-400" colSpan={2}>無料</td>
                 </tr>
                 <tr className="bg-green-50">
                   <td className="border border-green-200 px-4 py-3">譲受者（買い手）</td>
-                  <td className="border border-green-200 px-4 py-3 text-center">成約金額の3%</td>
-                  <td className="border border-green-200 px-4 py-3 text-center font-semibold">50,000円</td>
+                  <td className="border border-green-200 px-4 py-3 text-center font-semibold" colSpan={2}>60,000円（成約時のみ）</td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <p className="mb-2">2　手数料の算定基準となる成約金額は、譲渡者と譲受者が合意した事業の譲渡対価の総額とします。</p>
-          <p className="mb-2">3　手数料は、成約後14日以内に運営者が指定する方法により支払うものとします。</p>
+          <p className="mb-2">2　手数料は、成約が確定した時点で発生し、成約後14日以内に運営者が指定する方法により支払うものとします。</p>
           <p>4　支払済みの手数料は、いかなる理由によっても返還しません。</p>
         </section>
 

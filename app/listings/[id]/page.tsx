@@ -103,7 +103,8 @@ export default async function ListingDetail({ params }: { params: Promise<{ id: 
               <p className="font-bold text-gray-800 mb-3">ご注意事項</p>
               <ul className="space-y-2 text-xs leading-relaxed">
                 <li>・ 掲載情報は売り手の申告に基づいています</li>
-                <li>・ 成約時には別途手数料が発生します</li>
+                <li>・ 成約時に買い手のみ手数料60,000円が発生します</li>
+                <li>・ 売り手への手数料は一切かかりません</li>
                 <li>・ 資格が必要な業種は免許の確認が必要です</li>
               </ul>
             </div>
