@@ -93,21 +93,19 @@ export default function AboutPage() {
       {/* 料金 */}
       <div className="bg-green-50 rounded-2xl p-8 mb-12 text-center">
         <h2 className="text-2xl font-bold text-gray-800 mb-6">料金について</h2>
-        <div className="grid grid-cols-3 gap-6">
-          <div className="bg-white rounded-xl p-5 shadow-sm">
-            <p className="text-gray-500 text-sm mb-2">掲載費用</p>
-            <p className="text-3xl font-bold text-green-700">無料</p>
+        <div className="grid grid-cols-2 gap-6 max-w-xl mx-auto mb-6">
+          <div className="bg-white rounded-xl p-6 shadow-sm border-2 border-green-100">
+            <p className="text-gray-500 text-sm mb-2">売り手（譲渡者）</p>
+            <p className="text-4xl font-bold text-green-700">完全無料</p>
+            <p className="text-xs text-gray-400 mt-2">掲載〜成約まで一切かかりません</p>
           </div>
-          <div className="bg-white rounded-xl p-5 shadow-sm">
-            <p className="text-gray-500 text-sm mb-2">閲覧・問い合わせ</p>
-            <p className="text-3xl font-bold text-green-700">無料</p>
-          </div>
-          <div className="bg-white rounded-xl p-5 shadow-sm">
-            <p className="text-gray-500 text-sm mb-2">成約時手数料</p>
-            <p className="text-3xl font-bold text-gray-700">別途</p>
+          <div className="bg-white rounded-xl p-6 shadow-sm border-2 border-yellow-100">
+            <p className="text-gray-500 text-sm mb-2">買い手（譲受者）</p>
+            <p className="text-3xl font-bold text-gray-800">60,000円</p>
+            <p className="text-xs text-gray-400 mt-2">成約時のみ。閲覧・問い合わせは無料</p>
           </div>
         </div>
-        <p className="text-gray-500 text-sm mt-4">※ 成約時の手数料は成約金額に応じてご相談させていただきます</p>
+        <p className="text-gray-500 text-sm">※ 成約が成立した場合のみ、買い手の方に60,000円（税込）が発生します</p>
       </div>
 
       {/* CTA */}
