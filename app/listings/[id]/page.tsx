@@ -2,11 +2,12 @@ import { supabase, Listing } from '@/lib/supabase'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
-export default async function ListingDetail({ params }: { params: { id: string } }) {
+export default async function ListingDetail({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
   const { data: listing } = await supabase
     .from('listings')
     .select('*')
-    .eq('id', params.id)
+    .eq('id', id)
     .single<Listing>()
 
   if (!listing) notFound()
