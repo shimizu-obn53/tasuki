@@ -65,8 +65,9 @@ export default function RootLayout({
                 <p className="text-sm text-green-300">info@tasuki-match.jp</p>
               </div>
             </div>
-            <div className="border-t border-green-700 pt-4 text-center text-green-400 text-xs">
-              © 2026 TASUKI. All rights reserved.
+            <div className="border-t border-green-700 pt-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-green-400 text-xs">
+              <span>© 2026 TASUKI. All rights reserved.</span>
+              <Link href="/terms" className="hover:text-white underline">利用規約</Link>
             </div>
           </div>
         </footer>

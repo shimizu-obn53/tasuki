@@ -55,6 +55,10 @@ export default async function ListingDetail({ params }: { params: Promise<{ id: 
                 <p className="text-xs text-gray-400 mb-1">スタッフ数</p>
                 <p className="text-xl font-bold text-gray-700">{listing.staff_count ?? '-'}名</p>
               </div>
+              <div className="bg-green-50 rounded-xl p-4 col-span-2">
+                <p className="text-xs text-gray-400 mb-1">譲渡希望時期</p>
+                <p className="text-xl font-bold text-green-700">{listing.transfer_timing ?? '相談可能'}</p>
+              </div>
             </div>
           </div>
 

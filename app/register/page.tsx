@@ -16,6 +16,7 @@ export default function RegisterPage() {
     monthlyRevenue: '',
     years: '',
     reason: '',
+    transferTiming: '',
     description: '',
     ownerName: '',
     email: '',
@@ -40,6 +41,7 @@ export default function RegisterPage() {
       monthly_revenue: form.monthlyRevenue ? parseInt(form.monthlyRevenue) : null,
       years_in_business: form.years ? parseInt(form.years) : null,
       reason: form.reason,
+      transfer_timing: form.transferTiming || null,
       description: form.description,
       owner_name: form.ownerName,
       email: form.email,
@@ -135,9 +137,23 @@ export default function RegisterPage() {
               <input type="number" name="years" value={form.years} onChange={handleChange} placeholder="例：15" className="w-full border border-gray-200 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500" />
             </div>
           </div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-1">譲渡理由 <span className="text-red-500">*</span></label>
-            <input type="text" name="reason" value={form.reason} onChange={handleChange} placeholder="例：高齢のため、体力的な限界のため" required className="w-full border border-gray-200 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500" />
+          <div className="grid grid-cols-2 gap-4 mb-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">譲渡理由 <span className="text-red-500">*</span></label>
+              <input type="text" name="reason" value={form.reason} onChange={handleChange} placeholder="例：高齢のため、体力的な限界のため" required className="w-full border border-gray-200 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">譲渡希望時期 <span className="text-red-500">*</span></label>
+              <select name="transferTiming" value={form.transferTiming} onChange={handleChange} required className="w-full border border-gray-200 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500">
+                <option value="">選択してください</option>
+                <option value="即時（すぐにでも）">即時（すぐにでも）</option>
+                <option value="3ヶ月以内">3ヶ月以内</option>
+                <option value="6ヶ月以内">6ヶ月以内</option>
+                <option value="1年以内">1年以内</option>
+                <option value="1〜2年以内">1〜2年以内</option>
+                <option value="時期は相談可能">時期は相談可能</option>
+              </select>
+            </div>
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">お店の説明</label>

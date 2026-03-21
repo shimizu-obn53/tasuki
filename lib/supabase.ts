@@ -26,6 +26,7 @@ export interface Listing {
   owner_name: string
   email: string
   phone: string
+  transfer_timing: string | null
 }
 
 export interface Inquiry {
