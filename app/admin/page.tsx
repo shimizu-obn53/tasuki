@@ -22,6 +22,11 @@ const CHECKLISTS = [
   { label: '引き継ぎ確認チェックリスト', file: 'checklist_handover.pdf' },
 ]
 
+const TEMPLATES = [
+  { label: '基本合意書（LOI）ひな形', file: 'template_loi.pdf' },
+  { label: '事業譲渡契約書ひな形', file: 'template_transfer.pdf' },
+]
+
 export default function AdminPage() {
   const router = useRouter()
   const [loading, setLoading] = useState(true)
@@ -109,22 +114,41 @@ export default function AdminPage() {
         </div>
       )}
 
-      {/* チェックリストDL */}
-      <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-8">
-        <h2 className="text-base font-bold text-gray-800 mb-4">📥 チェックリスト・テンプレート</h2>
-        <div className="grid md:grid-cols-3 gap-3">
-          {CHECKLISTS.map(({ label, file }) => (
-            <a
-              key={file}
-              href={`/downloads/${file}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 border border-green-200 rounded-xl px-4 py-3 hover:bg-green-50 transition"
-            >
-              <span className="text-green-700 text-xl">📄</span>
-              <span className="text-sm font-medium text-gray-700">{label}</span>
-            </a>
-          ))}
+      {/* チェックリスト・契約書DL */}
+      <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-8 space-y-5">
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-3">📋 チェックリスト</h2>
+          <div className="grid md:grid-cols-3 gap-3">
+            {CHECKLISTS.map(({ label, file }) => (
+              <a
+                key={file}
+                href={`/downloads/${file}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 border border-green-200 rounded-xl px-4 py-3 hover:bg-green-50 transition"
+              >
+                <span className="text-green-700 text-xl">📄</span>
+                <span className="text-sm font-medium text-gray-700">{label}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+        <div>
+          <h2 className="text-base font-bold text-gray-800 mb-3">📝 契約書ひな形</h2>
+          <div className="grid md:grid-cols-2 gap-3">
+            {TEMPLATES.map(({ label, file }) => (
+              <a
+                key={file}
+                href={`/downloads/${file}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 border border-blue-200 rounded-xl px-4 py-3 hover:bg-blue-50 transition"
+              >
+                <span className="text-blue-700 text-xl">📝</span>
+                <span className="text-sm font-medium text-gray-700">{label}</span>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
 
