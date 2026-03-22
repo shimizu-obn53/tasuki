@@ -25,6 +25,32 @@ export default async function ListingDetail({ params }: { params: Promise<{ id: 
 
       <div className="grid md:grid-cols-3 gap-8">
         <div className="md:col-span-2">
+          {/* フォトギャラリー */}
+          {listing.images && listing.images.length > 0 && (
+            <div className="mb-6">
+              <div className="rounded-2xl overflow-hidden aspect-video mb-2 bg-gray-100">
+                <img
+                  src={listing.images[0]}
+                  alt={listing.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              {listing.images.length > 1 && (
+                <div className="grid grid-cols-4 gap-2">
+                  {listing.images.slice(1).map((url, idx) => (
+                    <div key={url} className="aspect-square rounded-xl overflow-hidden bg-gray-100">
+                      <img
+                        src={url}
+                        alt={`写真${idx + 2}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
           <div className="flex items-center gap-2 mb-3">
             <span className={`text-sm font-bold px-3 py-1 rounded-full ${listing.type === '美容院' ? 'bg-pink-100 text-pink-700' : 'bg-blue-100 text-blue-700'}`}>
               {listing.type}

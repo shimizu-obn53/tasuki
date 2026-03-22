@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 import type { Listing } from '@/lib/supabase'
+import ImageUpload from '@/app/components/ImageUpload'
 
 const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL ?? ''
 
@@ -183,6 +184,17 @@ function EditListingContent() {
             {field('メールアドレス', 'email', 'email', 'yamada@example.com')}
             {field('電話番号', 'phone', 'tel', '090-1234-5678')}
           </div>
+        </div>
+
+        {/* 写真管理 */}
+        <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+          <h2 className="text-sm font-bold text-gray-700 mb-1">写真</h2>
+          <p className="text-xs text-gray-400 mb-4">最大5枚。1枚目がメイン写真になります。</p>
+          <ImageUpload
+            listingId={form.id ?? ''}
+            images={form.images ?? []}
+            onUpdate={(newImages) => setForm({ ...form, images: newImages })}
+          />
         </div>
 
         {saveMsg && (

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
 import type { Listing, Inquiry } from '@/lib/supabase'
+import ImageUpload from '@/app/components/ImageUpload'
 
 const STATUS_COLORS: Record<string, string> = {
   '審査中': 'bg-yellow-100 text-yellow-800',
@@ -292,6 +293,17 @@ export default function MyPage() {
             </div>
           </div>
         )}
+      </div>
+
+      {/* 写真管理 */}
+      <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-6">
+        <h2 className="text-lg font-bold text-gray-800 mb-1">写真</h2>
+        <p className="text-xs text-gray-400 mb-4">お店の内装・外観・設備などを最大5枚まで登録できます</p>
+        <ImageUpload
+          listingId={listing.id}
+          images={listing.images ?? []}
+          onUpdate={(newImages) => setListing({ ...listing, images: newImages })}
+        />
       </div>
 
       {/* 問い合わせ一覧 */}

@@ -28,6 +28,7 @@ export interface Listing {
   email: string
   phone: string
   transfer_timing: string | null
+  images: string[] | null
 }
 
 export interface Inquiry {
