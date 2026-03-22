@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
@@ -8,7 +8,7 @@ import type { Listing } from '@/lib/supabase'
 
 const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL ?? ''
 
-export default function AdminEditListing() {
+function EditListingContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const id = searchParams.get('id')
@@ -208,5 +208,13 @@ export default function AdminEditListing() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function AdminEditListing() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-gray-400">読み込み中...</div>}>
+      <EditListingContent />
+    </Suspense>
   )
 }
