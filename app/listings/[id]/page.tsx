@@ -1,6 +1,7 @@
 import { supabase, Listing } from '@/lib/supabase'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import InquiryForm from './InquiryForm'
 
 export default async function ListingDetail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -91,14 +92,8 @@ export default async function ListingDetail({ params }: { params: Promise<{ id: 
             <div className="bg-green-800 text-white rounded-2xl p-6 shadow-lg mb-4">
               <p className="text-green-200 text-sm mb-1">譲渡希望金額</p>
               <p className="text-4xl font-bold mb-4">{listing.price}<span className="text-xl">万円</span></p>
-              <Link
-                href={`/contact?id=${listing.id}&title=${encodeURIComponent(listing.title ?? '')}`}
-                className="block bg-yellow-400 text-green-900 text-center py-4 rounded-xl font-bold text-lg hover:bg-yellow-300 transition"
-              >
-                この案件に問い合わせる
-              </Link>
-              <p className="text-green-300 text-xs text-center mt-3">※ 問い合わせは無料です</p>
             </div>
+            <InquiryForm listingId={listing.id} />
             <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 text-sm text-gray-600">
               <p className="font-bold text-gray-800 mb-3">ご注意事項</p>
               <ul className="space-y-2 text-xs leading-relaxed">

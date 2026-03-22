@@ -1,9 +1,11 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabase'
 
 export default function RegisterPage() {
+  const router = useRouter()
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -21,6 +23,8 @@ export default function RegisterPage() {
     ownerName: '',
     email: '',
     phone: '',
+    password: '',
+    passwordConfirm: '',
   })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -32,7 +36,35 @@ export default function RegisterPage() {
     setLoading(true)
     setError('')
 
-    const { error } = await supabase.from('listings').insert({
+    if (form.password !== form.passwordConfirm) {
+      setError('パスワードが一致しません。')
+      setLoading(false)
+      return
+    }
+    if (form.password.length < 8) {
+      setError('パスワードは8文字以上で設定してください。')
+      setLoading(false)
+      return
+    }
+
+    // 1. Supabase Auth でアカウント作成
+    const { data: authData, error: authError } = await supabase.auth.signUp({
+      email: form.email,
+      password: form.password,
+    })
+
+    if (authError || !authData.user) {
+      setError(authError?.message === 'User already registered'
+        ? 'このメールアドレスはすでに登録されています。ログインページからサインインしてください。'
+        : 'アカウントの作成に失敗しました。もう一度お試しください。'
+      )
+      setLoading(false)
+      return
+    }
+
+    // 2. listings テーブルに掲載情報を登録
+    const { error: listingError } = await supabase.from('listings').insert({
+      user_id: authData.user.id,
       type: form.type,
       title: form.name ? `${form.prefecture} ${form.name}` : `${form.prefecture} ${form.type}`,
       prefecture: form.prefecture,
@@ -51,12 +83,13 @@ export default function RegisterPage() {
 
     setLoading(false)
 
-    if (error) {
-      setError('送信に失敗しました。もう一度お試しください。')
+    if (listingError) {
+      setError('掲載情報の登録に失敗しました。もう一度お試しください。')
       return
     }
 
     setSubmitted(true)
+    setTimeout(() => router.push('/mypage'), 2000)
   }
 
   if (submitted) {
@@ -65,12 +98,9 @@ export default function RegisterPage() {
         <div className="text-6xl mb-6">✅</div>
         <h1 className="text-3xl font-bold text-gray-800 mb-4">ご登録ありがとうございます</h1>
         <p className="text-gray-500 text-lg leading-relaxed mb-8">
-          内容を確認後、2〜3営業日以内にご連絡いたします。<br />
-          しばらくお待ちください。
+          内容を確認後、2〜3営業日以内に公開いたします。<br />
+          マイページに移動します…
         </p>
-        <a href="/" className="inline-block bg-green-700 text-white px-8 py-3 rounded-xl font-bold hover:bg-green-800 transition">
-          トップへ戻る
-        </a>
       </div>
     )
   }
@@ -162,8 +192,8 @@ export default function RegisterPage() {
         </div>
 
         <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-          <h2 className="text-lg font-bold text-gray-800 mb-4">ご連絡先（非公開）</h2>
-          <p className="text-sm text-gray-400 mb-4">連絡先は公開されません。TASUKIからのご連絡にのみ使用します。</p>
+          <h2 className="text-lg font-bold text-gray-800 mb-4">ご連絡先・ログイン情報（非公開）</h2>
+          <p className="text-sm text-gray-400 mb-4">連絡先は公開されません。TASUKIからのご連絡にのみ使用します。登録後はマイページにログインできます。</p>
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">お名前 <span className="text-red-500">*</span></label>
@@ -177,6 +207,16 @@ export default function RegisterPage() {
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">電話番号</label>
                 <input type="tel" name="phone" value={form.phone} onChange={handleChange} placeholder="例：090-1234-5678" className="w-full border border-gray-200 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500" />
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">パスワード <span className="text-red-500">*</span></label>
+                <input type="password" name="password" value={form.password} onChange={handleChange} placeholder="8文字以上" required minLength={8} className="w-full border border-gray-200 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">パスワード（確認） <span className="text-red-500">*</span></label>
+                <input type="password" name="passwordConfirm" value={form.passwordConfirm} onChange={handleChange} placeholder="もう一度入力" required className="w-full border border-gray-200 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500" />
               </div>
             </div>
           </div>

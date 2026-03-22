@@ -9,6 +9,7 @@ export type BusinessType = '美容院' | '整骨院'
 
 export interface Listing {
   id: string
+  user_id: string | null
   type: BusinessType
   title: string
   prefecture: string
@@ -22,7 +23,7 @@ export interface Listing {
   features: string[]
   owner_age: number
   published_at: string
-  status: '公開中' | '商談中' | '成約済み'
+  status: '公開中' | '商談中' | '成約済み' | '審査中' | '取り下げ'
   owner_name: string
   email: string
   phone: string
@@ -34,7 +35,8 @@ export interface Inquiry {
   listing_id: string
   buyer_name: string
   buyer_email: string
-  buyer_phone: string
+  buyer_phone: string | null
   message: string
+  status: '未読' | '既読' | '対応済み'
   created_at: string
 }

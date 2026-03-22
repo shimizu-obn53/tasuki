@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import Link from 'next/link'
+import HeaderNav from './components/HeaderNav'
 
 export const metadata: Metadata = {
   title: 'TASUKI - 美容院・整骨院の事業承継マッチング',
@@ -22,20 +23,7 @@ export default function RootLayout({
               TASUKI
               <span className="text-sm font-normal text-gray-500 ml-2">たすき</span>
             </Link>
-            <nav className="flex items-center gap-6 text-sm">
-              <Link href="/listings" className="text-gray-600 hover:text-green-800 font-medium">
-                案件を探す
-              </Link>
-              <Link href="/about" className="text-gray-600 hover:text-green-800 font-medium">
-                TASUKIとは
-              </Link>
-              <Link
-                href="/register"
-                className="bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-800 font-medium transition"
-              >
-                無料で掲載する
-              </Link>
-            </nav>
+            <HeaderNav />
           </div>
         </header>
 
