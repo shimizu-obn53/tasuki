@@ -23,6 +23,7 @@ const CHECKLISTS = [
 ]
 
 const TEMPLATES = [
+  { label: '仲介サービス利用契約書ひな形', file: 'template_service_agreement.pdf' },
   { label: '基本合意書（LOI）ひな形', file: 'template_loi.pdf' },
   { label: '事業譲渡契約書ひな形', file: 'template_transfer.pdf' },
 ]
