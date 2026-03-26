@@ -39,5 +39,6 @@ export interface Inquiry {
   email: string
   phone: string | null
   message: string
+  status: '未読' | '対応済み'
   created_at: string
 }
