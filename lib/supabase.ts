@@ -35,9 +35,9 @@ export interface Listing {
 export interface Inquiry {
   id: string
   listing_id: string
-  name: string
-  email: string
-  phone: string | null
+  buyer_name: string
+  buyer_email: string
+  buyer_phone: string | null
   message: string
   status: '未読' | '対応済み'
   created_at: string
